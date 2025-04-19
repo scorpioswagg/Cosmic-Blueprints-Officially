@@ -1,6 +1,6 @@
-"use client";
-import React, { useEffect, useRef } from 'react';
-
++ "use client";
+  import React, { useEffect, useRef } from 'react';
+  
 interface Star {
   x: number;
   y: number;
