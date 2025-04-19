@@ -1,17 +1,16 @@
 import { notFound } from "next/navigation";
 
 interface ReportDetailProps {
-  params: { slug: string };
+  // Next.js 15 passes dynamic-route params as a Promise :contentReference[oaicite:2]{index=2}
+  params: Promise<{ slug: string }>;
 }
 
-const REPORTS = Array.from({length: 12}, (_, i) => ({
-  slug: `sample-report-${i+1}`,
-  title: `Report Title ${i+1}`,
-  description: `Detailed description for report ${i+1}.`,
-}));
-
+export default async function ReportDetail({ params }: ReportDetailProps) {
+  // Await the promise to extract slug :contentReference[oaicite:4]{index=4}
+  const { slug } = await params;
+}
 export default function ReportDetail({ params }: ReportDetailProps) {
-  const report = REPORTS.find(r => r.slug === params.slug);
+ const report = REPORTS.find(r => r.slug === slug);
   if (!report) notFound();
   return (
     <main className="min-h-screen bg-gradient-to-b from-black to-slate-900 text-silver p-8">
